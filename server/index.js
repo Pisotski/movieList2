@@ -14,11 +14,14 @@ var collection = [
   ];
 
 app.get('/movies', function(req, res) {
-  res.status(200).send(collection);
+  db.Movie.find((err, data) => {
+    err ? res.status(500) : res.status(200).send(data);
+  })
 });
 
 app.post('/movies', function(req, res) {
   db.save(req.body);
+  // collection.push(req.body);
   res.status(201).send();
   })
 

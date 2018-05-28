@@ -30,4 +30,4 @@ let save = function(movie) {
     err ? console.log(err.message) : console.log(newMovie.title, ' movie saved'));
 }
 
-module.exports = {save}
+module.exports = {save, Movie}
