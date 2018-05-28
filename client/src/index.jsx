@@ -36,8 +36,8 @@ class App extends React.Component {
     return (
       <div>
       <h1>MovileList2</h1>
-      <MovieList collection={this.state.collection}/>
       <Search onClickHandle={this.onClickHandle}/>
+      <MovieList collection={this.state.collection}/>
       <AddMovie onAddHandle={this.onAddHandle}/>
       </div>)
   }
