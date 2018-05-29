@@ -19,7 +19,7 @@ movieSchema.plugin(uniqueValidator);
 
 var Movie = mongoose.model('Movie', movieSchema);
 
-let save = function(movie) {
+let save = function(movie, callback) {
   var newMovie = new Movie({
     title: movie.title,
     genre: movie.genre,
@@ -27,7 +27,7 @@ let save = function(movie) {
   });
 
   Movie.create(newMovie, (err, data) =>
-    err ? console.log(err.message) : console.log(newMovie.title, ' movie saved'));
+    err ? callback(err, null) : callback(null, data));
 }
 
 module.exports = {save, Movie}

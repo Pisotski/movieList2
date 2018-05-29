@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import MovieList from './components/MovieList.jsx';
 import Search from './components/Search.jsx';
 import AddMovie from './components/AddMovie.jsx';
+import RemoveMovie from './components/RemoveMovie.jsx';
 import $ from 'jquery';
 
 class App extends React.Component {
@@ -15,6 +16,7 @@ class App extends React.Component {
     };
     this.onClickHandle = this.onClickHandle.bind(this);
     this.onAddHandle = this.onAddHandle.bind(this);
+    this.onRemoveHandle = this.onRemoveHandle.bind(this);
     this.getMovies = this.getMovies.bind(this);
   }
 
@@ -29,8 +31,17 @@ class App extends React.Component {
     .done((data) => this.setState({collection: data}))
   }
 
+  onRemoveHandle(value) {
+    $.ajax({
+      url: '/movies',
+      method: 'DELETE',
+      data: JSON.stringify({'title': value}),
+      contentType: 'application/json'
+    })
+    .done((data) => this.getMovies());
+  }
+
   onAddHandle(value) {
-    var context = this
     var newCollection = this.state.collection.concat([{'title': value}]);
     $.ajax({
       url: '/movies',
@@ -38,7 +49,7 @@ class App extends React.Component {
       data: JSON.stringify({'title': value}),
       contentType: 'application/json'
     })
-    .done((data) => context.getMovies());
+    .done((data) => this.getMovies());
   }
 
   onClickHandle(value) {
@@ -47,6 +58,7 @@ class App extends React.Component {
       collection: filteredCollection
     });
   }
+
   render() {
     return (
       <div>
@@ -54,6 +66,7 @@ class App extends React.Component {
       <Search onClickHandle={this.onClickHandle}/>
       <MovieList collection={this.state.collection}/>
       <AddMovie onAddHandle={this.onAddHandle}/>
+      <RemoveMovie onRemoveHandle={this.onRemoveHandle}/>
       </div>)
   }
 }
