@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AddMovie extends React.Component {
+class RemoveMovie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -15,7 +15,7 @@ class AddMovie extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onAddHandle(this.state.value);
+    this.props.onRemoveHandle(this.state.value);
     this.state.value = '';
   }
 
@@ -23,15 +23,11 @@ class AddMovie extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder='Add New Movie'/>
+          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder='Remove Movie'/>
         </label>
-        <input type="submit" value="AddMovie" />
+        <input type="submit" value="Remove" />
       </form>
     );
   }
 }
-
-export default AddMovie;
-
-
-
+export default RemoveMovie;
