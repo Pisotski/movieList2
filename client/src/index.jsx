@@ -10,9 +10,8 @@ class App extends React.Component {
   constructor(props) {
   super(props);
     this.state = {
-      collection : [
-        {title: 'One Flew Over the Cuckoo\'s Nest'}
-      ]
+      isFirst: true,
+      collection : []
     };
     this.onClickHandle = this.onClickHandle.bind(this);
     this.onAddHandle = this.onAddHandle.bind(this);
